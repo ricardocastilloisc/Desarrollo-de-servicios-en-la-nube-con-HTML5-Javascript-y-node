@@ -1,6 +1,10 @@
 var fs = require('fs');
 		
 	
+if(process.argv.length < 4){
+	console.log('Sintaxis incorrecta, se requiere: node merge <destino> <origen1> <origen2> .. <origenN>'); 
+	process.exit(); // Termina el proceso
+}	
 
 //parametros
 var archivodestino = process.argv[2];
@@ -20,20 +24,20 @@ function leerArchivo(error){
 	{
 		throw error;
 	}
-	var nuevo_archivo = archivos.shift();
+	var new_archivo = archivos.shift();
 	
 	if(nuevo_archivo !=undefined)
 	{
-		fs.readFile(nuevo_archivo,appendArchivo);
+		fs.readFile(new_archivo,appendArchivo);
 	}
 }
 
-function appendArchivo(error,d){
+function appendArchivo(error,data){
 	if(error)
 	{
 		throw error;
 	}
-	fs.appendFile(archivodestino,d,leerArchivo);
+	fs.appendFile(archivodestino,data,leerArchivo);
 			
 }
 
@@ -41,4 +45,4 @@ function appendArchivo(error,d){
 				//archivo //apartir del uno es donde se ponen los archivos 
 				//destino //
 //node merge.js final.js 1.js 2.js 3.js
-console.log('Ficheros integrados');
+console.log('Proceso terminado');
